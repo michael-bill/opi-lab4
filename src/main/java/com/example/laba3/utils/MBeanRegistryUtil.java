@@ -25,10 +25,6 @@ public class MBeanRegistryUtil implements ServletContextListener {
         }
     }
 
-    public static boolean isRegistered(Object bean){
-        return beans.containsKey(bean.getClass());
-    }
-
     public static void unregisterBean(Object bean) {
         if (!beans.containsKey(bean.getClass())) {
             throw new IllegalArgumentException("Specified bean is not registered.");

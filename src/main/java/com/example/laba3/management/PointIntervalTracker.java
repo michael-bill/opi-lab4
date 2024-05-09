@@ -3,6 +3,7 @@ package com.example.laba3.management;
 import com.example.laba3.utils.MBeanRegistryUtil;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Destroyed;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
 import javax.inject.Named;
@@ -15,6 +16,10 @@ public class PointIntervalTracker implements PointIntervalTrackerMBean {
 
 	public void init(@Observes @Initialized(ApplicationScoped.class) Object unused) {
 		MBeanRegistryUtil.registerBean(this, "PointIntervalTrackerMBean");
+	}
+
+	public void destroy(@Observes @Destroyed(ApplicationScoped.class) Object unused) {
+		MBeanRegistryUtil.unregisterBean(this);
 	}
 
 	private static long DAY = 86400000L;

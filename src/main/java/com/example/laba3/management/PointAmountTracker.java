@@ -3,6 +3,7 @@ package com.example.laba3.management;
 import com.example.laba3.utils.MBeanRegistryUtil;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Destroyed;
 import javax.enterprise.context.Initialized;
 import javax.enterprise.event.Observes;
 import javax.inject.Named;
@@ -16,6 +17,10 @@ public class PointAmountTracker extends NotificationBroadcasterSupport implement
 
 	public void init(@Observes @Initialized(ApplicationScoped.class) Object unused) {
 		MBeanRegistryUtil.registerBean(this, "PointAmountTrackerMBean");
+	}
+
+	public void destroy(@Observes @Destroyed(ApplicationScoped.class) Object unused) {
+		MBeanRegistryUtil.unregisterBean(this);
 	}
 
 	private long sequenceNumber = 1L;
