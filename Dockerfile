@@ -6,4 +6,5 @@ ENV WILDFLY_PASS admin
 
 COPY target/*.war $DEPLOYMENT_DIR
 
+RUN /opt/jboss/wildfly/bin/add-user.sh user1 Qwerty123
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
