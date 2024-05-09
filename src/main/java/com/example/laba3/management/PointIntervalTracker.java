@@ -1,9 +1,21 @@
 package com.example.laba3.management;
 
+import com.example.laba3.utils.MBeanRegistryUtil;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Initialized;
+import javax.enterprise.event.Observes;
+import javax.inject.Named;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+@Named
+@ApplicationScoped
 public class PointIntervalTracker implements PointIntervalTrackerMBean {
+
+	public void init(@Observes @Initialized(ApplicationScoped.class) Object unused) {
+		MBeanRegistryUtil.registerBean(this, "PointIntervalTrackerMBean");
+	}
 
 	private static long DAY = 86400000L;
 	private static long HOUR = 3600000L;
@@ -20,8 +32,7 @@ public class PointIntervalTracker implements PointIntervalTrackerMBean {
 		long hours = (interval - days * DAY) / HOUR;
 		long minutes = (interval - days * DAY - hours * HOUR) / MIN;
 		long seconds = (interval - days * DAY - hours * HOUR - minutes * MIN) / SEC;
-		String interval = Arrays.asList(days != 0L ? days + " days" : null, hours != 0L ? hours + " hours" : null, minutes != 0L ? minutes + " minutes" : null, seconds != 0L ? seconds + " seconds" : null).stream().filter(item -> item != null).collect(Collectors.joining(" "));
-		return interval;
+        return Arrays.asList(days != 0L ? days + " days" : null, hours != 0L ? hours + " hours" : null, minutes != 0L ? minutes + " minutes" : null, seconds != 0L ? seconds + " seconds" : null).stream().filter(item -> item != null).collect(Collectors.joining(" "));
 	}
 
 	@Override

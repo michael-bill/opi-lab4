@@ -1,9 +1,13 @@
 package com.example.laba3.beans;
 
+import com.example.laba3.management.PointAmountTrackerMBean;
+import com.example.laba3.management.PointIntervalTrackerMBean;
+import com.example.laba3.management.TestMBean;
 import com.example.laba3.model.PointResult;
 import org.primefaces.PrimeFaces;
 
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -11,8 +15,16 @@ import java.time.format.DateTimeFormatter;
 
 public class PointBean implements Serializable {
 
-    private PointsStorageBean pointsStorageBean;
+    @Inject
+    private PointAmountTrackerMBean pointAmountTrackerMBean;
 
+    @Inject
+    private PointIntervalTrackerMBean pointIntervalTrackerMBean;
+
+    @Inject
+    private TestMBean testMBean;
+
+    private PointsStorageBean pointsStorageBean;
     private double x;
     private double y;
     private double r;
@@ -36,12 +48,15 @@ public class PointBean implements Serializable {
             return;
         }
 
-
         boolean validation = validation(x, y, r);
         HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         String httpSessionId = httpSession.getId();
         pointsStorageBean.addPoint(new PointResult(x, y, r, validation,
                 ZonedDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss dd-MM-yyyy")), httpSessionId));
+
+        pointAmountTrackerMBean.click(validation);
+        pointIntervalTrackerMBean.click();
+        testMBean.sayHello();
     }
 
     public static boolean validation(double x, double y, double r) {
