@@ -57,6 +57,6 @@
             <version>3.3.2</version>
         </plugin>
     </plugins>
-    <finalName>opi-lab4.war</finalName>
+    <finalName>opi-lab4</finalName>
   </build>
 </project>
