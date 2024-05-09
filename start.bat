@@ -1,0 +1,16 @@
+@echo off
+
+echo Cleaning and packaging project...
+mvn clean package
+
+echo Removing Docker container...
+docker rm -f jsf-web-lab3-application
+
+echo Removing Docker image...
+docker rmi -f opi-lab3-jsf-web-lab3-application
+
+echo Starting Docker container...
+docker-compose up -d
+
+echo Opening URL in default browser...
+start http://localhost:8080/laba3-1.0-SNAPSHOT
