@@ -5,8 +5,8 @@
     <session-factory>
         <!-- Настройки JDBC -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://postgres-db:5432/laba3_web</property>
-        <property name="hibernate.connection.username">user1</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/laba3_web</property>
+        <property name="hibernate.connection.username">hulumulu</property>
         <property name="hibernate.connection.password">Qwerty123</property>
 
         <!-- Настройки диалекта -->

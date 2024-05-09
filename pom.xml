@@ -57,6 +57,6 @@
             <version>3.3.2</version>
         </plugin>
     </plugins>
-    <finalName>${project.artifactId}</finalName>
+    <finalName>opi-lab4.war</finalName>
   </build>
 </project>
