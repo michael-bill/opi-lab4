@@ -45,6 +45,7 @@ public class Main {
             while (true) {
                 WebResponse response = sc.getResponse(request);
                 System.out.println("Count: " + number++ + response);
+                HttpUnitOptions.clearScriptErrorMessages();
             }
         } catch (InterruptedException ex) {
             Logger.getLogger("global").log(Level.SEVERE, null, ex);
