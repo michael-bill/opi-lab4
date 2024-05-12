@@ -47,13 +47,7 @@ public class Main {
                 System.out.println("Count: " + number++ + response);
                 HttpUnitOptions.clearScriptErrorMessages();
             }
-        } catch (InterruptedException ex) {
-            Logger.getLogger("global").log(Level.SEVERE, null, ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger("global").log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger("global").log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
+        } catch (Exception ex) {
             Logger.getLogger("global").log(Level.SEVERE, null, ex);
         }
     }
